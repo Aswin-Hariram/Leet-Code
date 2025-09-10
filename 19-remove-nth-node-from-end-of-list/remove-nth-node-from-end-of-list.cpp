@@ -16,7 +16,7 @@ public:
         ListNode* fast = dummy;
         ListNode* slow = dummy;
 
-        // Move fast n+1 steps ahead so slow points to node before target
+       
         for (int i = 0; i < n; i++) {
             fast = fast->next;
         }
