@@ -17,12 +17,12 @@ public:
         ListNode* slow = dummy;
 
         // Move fast n+1 steps ahead so slow points to node before target
-        for (int i = 0; i <= n; i++) {
+        for (int i = 0; i < n; i++) {
             fast = fast->next;
         }
 
         // Move both fast and slow together
-        while (fast != nullptr) {
+        while (fast->next != nullptr) {
             fast = fast->next;
             slow = slow->next;
         }
