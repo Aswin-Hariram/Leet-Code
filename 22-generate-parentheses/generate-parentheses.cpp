@@ -1,17 +1,21 @@
 class Solution {
 public:
-    void solve(int open, int close, vector<string> &ans, string temp, int n) {
+    void solve(int open, int close, vector<string> &ans, string &temp, int n) {
         if (temp.length() == 2 * n) {
             ans.push_back(temp);
             return;
         }
 
         if (open < n) {
-            solve(open + 1, close, ans, temp + "(", n);
+            temp.push_back('(');
+            solve(open + 1, close, ans, temp, n);
+            temp.pop_back();  // backtrack
         }
 
         if (close < open) {
-            solve(open, close + 1, ans, temp + ")", n);
+            temp.push_back(')');
+            solve(open, close + 1, ans, temp, n);
+            temp.pop_back();  // backtrack
         }
     }
 
