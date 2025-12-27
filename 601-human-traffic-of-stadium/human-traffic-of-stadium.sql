@@ -1,18 +1,25 @@
-with q1 as (
-select id, id - row_number() over() as id_diff
-from stadium
-where people > 99
+WITH
+q1 AS (
+    SELECT id, id - ROW_NUMBER() OVER() AS id_diff
+    FROM Stadium
+    WHERE people > 99
 ),
-q2 as (
-select *, row_number() over(partition by id_diff) as id_diff_order
-from q1
+q2 AS (
+    SELECT *,
+           ROW_NUMBER() OVER(PARTITION BY id_diff) AS id_diff_order
+    FROM q1
 ),
-q3 as (
-select id
-from q2
-where id_diff in (select id_diff from q2 where id_diff_order > 2 group by id_diff)
+q3 AS (
+    SELECT id
+    FROM q2
+    WHERE id_diff IN (
+        SELECT id_diff
+        FROM q2
+        GROUP BY id_diff
+        HAVING COUNT(*) >= 3
+    )
 )
-select *
-from stadium
-where id in (select id from q3)
-order by visit_date
+SELECT *
+FROM Stadium
+WHERE id IN (SELECT id FROM q3)
+ORDER BY visit_date;
