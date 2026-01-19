@@ -21,18 +21,18 @@ public:
 class Solution {
 public:
     vector<int> ans;
-    void helper(Node* node){
+    void dfs(Node* node){
         if(!node) return;
+        ans.push_back(node->val); 
+
         for(auto child:node->children){
-            ans.push_back(child->val);
-            helper(child);
+            
+            dfs(child);
         }
     }
     vector<int> preorder(Node* root) {
-        
-        if(!root) return ans;
-        ans.push_back(root->val);
-        helper(root);
+       
+        dfs(root);
         return ans;
     }
 };
