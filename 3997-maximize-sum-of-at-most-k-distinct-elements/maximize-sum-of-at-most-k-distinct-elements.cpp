@@ -12,15 +12,10 @@ public:
             }
         }
         sort(ans.begin(),ans.end());
-        for(int i=ans.size()-1;i>=0;i--){
-           
-            if(k-->0){
-                 cout<<ans[i]<<endl;
-                ans1.push_back(ans[i]);
-            }
-            else{
-                break;
-            }
+        for(int i=ans.size()-1;i>=0&&k>0;i--){
+           ans1.push_back(ans[i]);
+           k--;
+            
         }
         return ans1;
 
