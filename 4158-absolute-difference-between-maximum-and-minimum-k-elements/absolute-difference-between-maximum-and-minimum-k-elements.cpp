@@ -1,7 +1,7 @@
 class Solution {
 public:
     int absDifference(vector<int>& nums, int k) {
-        if(nums.size()<=k) return 0;
+        if(nums.size()<k) return 0;
 
         sort(nums.begin(),nums.end());
 
