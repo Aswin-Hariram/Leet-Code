@@ -1,30 +1,41 @@
 class Solution {
 public:
     int longestBalanced(vector<int>& nums) {
-        unordered_set<int> odd;
-        unordered_set<int> even;
-
 
         int n = nums.size();
         int ans = 0;
 
-        for(int left=0;left<n;left++){
-            odd.clear();
-            even.clear();
-            for(int right = left;right<n;right++){
-                int cur = nums[right];
+        for (int left = 0; left < n; left++) {
 
-                if(cur%2==0) even.insert(cur);
-                else odd.insert(cur);
+            // pruning
+            if (n - left <= ans) break;
 
-                if(odd.size()==even.size()){
-                    int s = right-left+1;
-                    ans = max(ans,s);
+            unordered_map<int,int> oddFreq;
+            unordered_map<int,int> evenFreq;
+
+            int distinctOdd = 0;
+            int distinctEven = 0;
+
+            for (int right = left; right < n; right++) {
+
+                int val = nums[right];
+
+                if (val % 2 == 0) {
+                    if (evenFreq[val] == 0)
+                        distinctEven++;
+                    evenFreq[val]++;
+                } else {
+                    if (oddFreq[val] == 0)
+                        distinctOdd++;
+                    oddFreq[val]++;
                 }
-               
 
+                if (distinctOdd == distinctEven) {
+                    ans = max(ans, right - left + 1);
+                }
             }
         }
+
         return ans;
     }
 };
