@@ -1,24 +1,26 @@
-#include <vector>
-#include <algorithm>
-using namespace std;
-
 class Solution {
 public:
     double findMaxAverage(vector<int>& nums, int k) {
-        // Compute initial sum of first k elements
-        double window_sum = 0;
-        for (int i = 0; i < k; ++i) {
-            window_sum += nums[i];
+        
+        double ans = INT_MIN;
+
+        int left = 0;
+        double sum = 0;
+
+        for(int right = 0; right < nums.size(); right++){
+            sum += nums[right];
+
+            if(right - left +1 == k ){
+
+                double avg = sum/k;
+
+                ans = max(ans, avg);
+
+                sum -= nums[left];
+                left++;
+            } 
         }
+        return ans;
 
-        double max_sum = window_sum;
-
-        // Slide the window
-        for (int i = k; i < nums.size(); ++i) {
-            window_sum += nums[i] - nums[i - k];
-            max_sum = max(max_sum, window_sum);
-        }
-
-        return max_sum / k;
     }
 };
