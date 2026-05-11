@@ -11,7 +11,7 @@ public:
             sum += nums[right];
 
             if(right - left + 1 == size){
-                int avg = sum/size;
+                double avg = sum/size;
                 res[left + k]=avg;
 
                 sum -= nums[left];
