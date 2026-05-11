@@ -13,7 +13,13 @@ public:
             freq[s[right]]++;
 
             // Keep window size = 3
-            if(right - left + 1 == 4) {
+            if(right - left + 1 == 3) {
+
+
+                // max window size reached and all are unique
+                if(freq.size()==3){
+                    ans++;
+                }
 
                 freq[s[left]]--;
 
@@ -24,10 +30,8 @@ public:
                 left++;
             }
 
-            // Valid substring
-            if(right - left + 1 == 3 && freq.size() == 3) {
-                ans++;
-            }
+           
+            
         }
 
         return ans;
