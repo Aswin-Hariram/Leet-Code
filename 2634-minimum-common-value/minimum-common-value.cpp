@@ -12,14 +12,10 @@ public:
                 return nums1[l1];
             }
 
-            while(l1 < nums1.size() &&
-                  nums1[l1] < nums2[l2]) {
+            if(nums1[l1] < nums2[l2]) {
                 l1++;
             }
-
-            while(l2 < nums2.size() &&
-                  l1 < nums1.size() &&
-                  nums1[l1] > nums2[l2]) {
+            else {
                 l2++;
             }
         }
