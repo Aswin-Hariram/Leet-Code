@@ -1,35 +1,44 @@
 class Solution {
 public:
-
-    bool isPalindrome(string st,int s,int e){
-
-        while(s<=e){
-            if(st[s++]!=st[e--]){
+    bool isPali(string &s, int l, int r) {
+        while (l < r) {
+            if (s[l] != s[r])
                 return false;
-            }
+            l++;
+            r--;
         }
         return true;
     }
 
-    void partition(int index,string s,vector<vector<string>> &ans,vector<string> &temp){
-        if(s.length()==index){
+    void solve(int st, string &s, int n,
+               vector<string> &temp,
+               vector<vector<string>> &ans) {
+
+        if (st == n) {
             ans.push_back(temp);
             return;
         }
-        for(int i=index;i<s.length();i++){
-            if(isPalindrome(s,index,i)){
-                temp.push_back(s.substr(index,i-index+1));
-                partition(i+1,s,ans,temp);
+
+        for (int i = st; i < n; i++) {
+
+            if (isPali(s, st, i)) {
+
+                temp.push_back(s.substr(st, i - st + 1));
+
+                solve(i + 1, s, n, temp, ans);
+
                 temp.pop_back();
             }
         }
     }
+
     vector<vector<string>> partition(string s) {
-        
+
         vector<vector<string>> ans;
         vector<string> temp;
 
-        partition(0,s,ans,temp);
+        solve(0, s, s.size(), temp, ans);
+
         return ans;
     }
 };
