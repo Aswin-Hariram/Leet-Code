@@ -1,32 +1,32 @@
 class Solution {
 public:
     int longestOnes(vector<int>& nums, int k) {
+        int n = nums.size();
 
         int left = 0;
-        int zero = 0;
+        int zero=0;
+      
         int ans = 0;
-
-        for(int right = 0; right < nums.size(); right++) {
-
-            // expanding
-            if(nums[right] == 0) {
+        for(int right = 0;right<n;right++){
+            cout<<"zero: "<<zero<<endl;;
+            if(nums[right]==0){
                 zero++;
             }
 
-            // shrink
-            while(zero > k) {
-
-                if(nums[left] == 0) {
+            while(zero>k){
+                if(nums[left]==0){
                     zero--;
                 }
-
                 left++;
             }
 
-            // process
-            ans = max(ans, right - left + 1);
-        }
+           
+            ans = max(ans,(right-left+1));
+            
 
+
+
+        }
         return ans;
     }
 };
