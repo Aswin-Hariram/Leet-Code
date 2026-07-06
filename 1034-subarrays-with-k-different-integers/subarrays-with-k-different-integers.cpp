@@ -11,7 +11,7 @@ public:
         for(int right = 0; right<n; right++){
             
             mp[nums[right]]++;
-            if(mp[nums[right]] == 0 ) mp.erase(nums[right]);
+         
             
             while(mp.size() > k){
                 mp[nums[left]]--;
