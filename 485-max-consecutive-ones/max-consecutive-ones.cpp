@@ -4,7 +4,7 @@ public:
         int n = nums.size();
 
 
-        int left = 0;
+       
         int ans = 0 ;
         int cur = 0;
         
