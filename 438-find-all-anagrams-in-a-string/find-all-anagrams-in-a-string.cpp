@@ -1,40 +1,48 @@
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
+
+        vector<int> res;
+
         int n = s.size();
         int k = p.size();
 
         unordered_map<char,int> mp;
 
-        for(char c:p){
+        for(char c : p) {
             mp[c]++;
         }
-        vector<int> ans;
 
         int left = 0;
-        int count = 0;
-        for(int right = 0;right<n;right++){
 
-            if(mp[s[right]] > 0){
-                count++;
-            }
+        for(int right = 0; right < n; right++) {
+
+            // Include current character
             mp[s[right]]--;
 
-            while(right-left+1>k){
-                mp[s[left]]++;
-                if(mp[s[left]]>0){
-                    count--;
-                }
-                left++;
+            if(mp[s[right]] == 0) {
+                mp.erase(s[right]);
             }
 
-            
-            if(right-left+1==k && count==k)
-                ans.push_back(left);
+            // Window size reached
+            if(right - left + 1 == k) {
 
+                // Valid anagram
+                if(mp.empty()) {
+                    res.push_back(left);
+                }
 
+                // Remove left character
+                mp[s[left]]++;
+
+                if(mp[s[left]] == 0) {
+                    mp.erase(s[left]);
+                }
+
+                left++;
+            }
         }
 
-        return ans;
+        return res;
     }
 };
