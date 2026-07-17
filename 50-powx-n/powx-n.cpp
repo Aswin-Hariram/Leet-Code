@@ -1,7 +1,7 @@
 class Solution {
 public:
 
-    double solve(double x, long long n){
+    double solve(double x, int n){
 
         if(n == 0) return 1;
 
@@ -16,15 +16,20 @@ public:
     }
 
     double myPow(double x, int n) {
+        bool f = false;
+        if(n==INT_MIN){
+            n+=1;
+            f=true;
+        }
 
-        long long N = n;
+        int N = n;
 
         // Handle negative powers
         if(N < 0){
             x = 1 / x;
             N = -N;
         }
-
+        if(f) return x * solve(x,N);
         return solve(x, N);
     }
 };
